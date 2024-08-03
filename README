@@ -1,0 +1,22 @@
+#### Introduction
+A service for `i3` that watches for `nop` keybindings with special command-words to trigger behavior. Supports left+right navigation of infinite workspaces per-output, as well as stashing and unstashing whole workspaces into the scratchpad.
+
+#### Dependencies
+The workspace stasher uses `dmenu` to provide prompts to the user.
+  
+#### Usage
+After starting the application, it runs in the background and monitors i3 for `nop` commands. Here's how to set up your i3 configuration to use the app:
+
+1. **Modify your i3 config file** (usually located at `~/.config/i3/config`) to include keybindings that trigger the application's functions:
+
+```
+# Move left or right in the workspace list
+bindsym Mod1+Control+Right nop workspace-switcher-right
+bindsym Mod1+Control+Left  nop workspace-switcher-left
+
+# Open the workspace un/stasher
+bindsym $mod+plus nop workspace-stash-unstash
+
+# Start the service when i3 starts
+exec --no-startup-id ~/deepsixr/target/debug/deepsixr
+```
